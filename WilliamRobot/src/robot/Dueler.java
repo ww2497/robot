@@ -1,4 +1,4 @@
-package duel;
+package robot;
 
 public interface Dueler {
 
