@@ -1,33 +1,14 @@
 package duel;
 
-import duel.CharacterA;
-import duel.CharacterB;
-import duel.Duel;
-import duel.Dueler;
-
-public class Duel {
+public interface Dueler {
 
 	
-
-	private Dueler d1;
-	private Dueler d2;
+	//print a taunt
+	//later: the taunt must be different each time the method is called
+	void taunt();
+	
+	//returns the name of the Dueler
+	String getName();
 	
 	
-	
-	
-	public static void main(String[] args){
-		Duel duel = new Duel();
-		duel.dukeItOut();
-	}
-	
-	public Duel() {
-		d1 = new CharacterA();
-		d2 = new CharacterB();
-	}
-	
-	public void dukeItOut(){
-		
-	}
-	
-
 }
