@@ -17,11 +17,11 @@ public class ChatbotMark implements Topic {
 
 	@Override
 	public void talk(String response) {
-		ChatbotMain.print("Hey! Wanna talk baout things, huh? I love talking about that. So tell me something");
+		ChatbotMain.print("Hey! We in Brooklyn, NYC and I know all the best spots all over the city. You want duh best pizza spot, pssh, fuhgettaboutit. Name spot you wanna know about.");
 		response = ChatbotMain.getInput();
 		while(ChatbotMain.findKeyword(response, goodbyeKeyword, 0 ) == -1) {
 			if(ChatbotMain.findKeyword(response, secretKeyword, 0 ) >= 0) {
-				ChatbotMain.print("Bleep bloop, How di d you know i was a robot?!");
+				ChatbotMain.print("Bleep bloop, How did you know i was a robot?!");
 				response = ChatbotMain.getInput();
 			}else {
 				ChatbotMain.print("Yeah, thats cool I guess, what else you got?");
