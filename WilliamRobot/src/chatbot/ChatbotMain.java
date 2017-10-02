@@ -30,10 +30,25 @@ public class ChatbotMain {
 	}
 
 		public static boolean keywordIsIsolated(int psn, String keyword, String s){
-			return true;
+			String[] alphabet = {"a","b","c"};
+			if(psn == 0) {
+				
+				
+			}
+			return false;
 		}
 
 		public static boolean noNegations(String s, int psn){
+			String[] negations = {"don't", "not"};
+			for(int i=0;i < negations.length;i++){
+				int a = negations[i].length()+1;
+				if(psn<negations[i].length()) {
+					return true;
+				}
+				if(s.substring(psn-a,psn).toLowerCase().equals(negations[i])){
+					return false;
+				}
+			}
 			return true;
 		}
 
