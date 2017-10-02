@@ -1,11 +1,11 @@
 package chatbot;
 
-public class TheoChatbot implements Topic {
+public class ChatbotTheo implements Topic {
 private String [] keywords;
 private String goodbyeKeyword;
 private String secretKeyword;
 private String response;
-	public TheoChatbot() {
+	public ChatbotTheo() {
 		String[] temp = {"stuff","things","whatever","nothing"};
 		keywords = temp;
 		goodbyeKeyword = "bye";
