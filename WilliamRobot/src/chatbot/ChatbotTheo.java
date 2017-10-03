@@ -4,24 +4,25 @@ public class ChatbotTheo implements Topic {
 private String [] keywords;
 private String goodbyeKeyword;
 private String secretKeyword;
-private String response;
+private String [] responses;
 	public ChatbotTheo() {
-		String[] temp = {"stuff","things","whatever","nothing"};
+		String[] temp = {"food","eat","hungry","restaurants"};
 		keywords = temp;
 		goodbyeKeyword = "bye";
-		secretKeyword = "dab";
-		response = "";
+		secretKeyword = "";
+		String[] asdf = {};
+		responses = asdf;
 	}
 
 	@Override
 	public void talk(String response) {
-		ChatbotMain.print("So youwant to talk");
+		ChatbotMain.print("Would you like me to recomend somewhere to eat");
 		while(ChatbotMain.findKeyword(response, goodbyeKeyword, 0)==-1) {
 			if(ChatbotMain.findKeyword(response, secretKeyword, 0)>=0) {
 				ChatbotMain.print("Get dabbed on");
 			}
 			else {
-				ChatbotMain.print("ok");
+				ChatbotMain.print("Im sorry I dont understand");
 			}
 		}
 		ChatbotMain.print("Well, it was nice talking to you"+ChatbotMain.chatbot.getUsername()+"!");
