@@ -43,11 +43,11 @@ public class ChatbotMain {
 				}
 				
 			}
-			for(int i=0;i<alphabet.length;i++){
-				if(s.substring(psn-1,psn).toLowerCase().equals(alphabet[i])){
+			for(int z=0;z<alphabet.length;z++){
+				if(s.substring(psn-1,psn).toLowerCase().equals(alphabet[z])){
 					return false;
 				}
-				if(s.substring(end+1,end+2).toLowerCase().equals(alphabet[i])){
+				if(s.substring(end+1,end+2).toLowerCase().equals(alphabet[z])){
 					return false;
 				}
 			}
