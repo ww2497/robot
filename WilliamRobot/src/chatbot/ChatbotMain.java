@@ -30,12 +30,28 @@ public class ChatbotMain {
 	}
 
 		public static boolean keywordIsIsolated(int psn, String keyword, String s){
-			String[] alphabet = {"a","b","c"};
+			int end = keyword.length+psn;
+			String[] alphabet = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"};
 			if(psn == 0) {
-				
+				for(int i=0;i<alphabet.length();i++){
+				if(s.substring(keyword.length,keyword.length+1;).toLowerCase().equals(alphabet[i])){
+					return false;
+					}
+					else{
+						return true;
+					}
+				}
 				
 			}
-			return false;
+			for(int i=0;i<alphabet.length();i++){
+				if(s.substring(psn-1,psn).toLowerCase().equals(alphabet[i])){
+					return false;
+				}
+				if(s.substring(end+1,end+2).toLowerCase().equals(alphabet[i])){
+					return false;
+				}
+			}
+			return true;
 		}
 
 		public static boolean noNegations(String s, int psn){
