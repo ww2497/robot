@@ -6,31 +6,52 @@ public class ChatbotWilliam implements Topic {
 	private String goodbyeKeyword;
 	private String secretKeyword;
 	private String response;
+	private boolean chatting;
 	
 	public ChatbotWilliam() {
-		String[] temp = {"stuff", "things", "whatever", "nothing"};
+		String[] temp = {"where is", "get there", "directions", "go to"};
 		keywords = temp;
 		secretKeyword = "pug";
 		response = "";
+		chatting = true;
 	}
 	@Override
 	public void talk(String response) {
-		// TODO Auto-generated method stub
-		ChatbotMain.print("Hey! So you want to talk about generic boring things, huh? I love talking about that. So tell me clearly.");
-		response = ChatbotMain.getInput();
-		while(ChatbotMain.findKeyword(response, goodbyeKeyword, 0) == -1){
-			if(ChatbotMain.findKeyword(response, secretKeyword, 0) >= 0) {
-				ChatbotMain.print("I can't even. I love pugs so much. Wow. You are so cool.");
-				response = ChatbotMain.getInput();
-				}
-			else {
-				ChatbotMain.print("Yeah. That's pretty cool. But there are things I like even more. Tell me something else.");
-				response = ChatbotMain.getInput();
+		ChatbotMain.print("Hi! I am your New York City Tour Bot, please tell me your name?");
+		
+		while(chatting) {
+			response = ChatbotMain.getInput();
+			if(ChatbotMain.chatbot.getLocation() == "brooklyn") {
+				ChatbotMain.print("It's located at" + "s.");
+			}
+			if(ChatbotMain.chatbot.getLocation() == "manhattan") {
+				ChatbotMain.print("It's located at" + "s.");
+			}
+			if(ChatbotMain.chatbot.getLocation() == "queens") {
+				ChatbotMain.print("It's located at" + "s.");
+			}
+			if(ChatbotMain.chatbot.getLocation() == "bronx") {
+				ChatbotMain.print("It's located at" + "s.");
+			}
+			if(ChatbotMain.chatbot.getLocation() == "staten island") {
+				ChatbotMain.print("It's located at" + "s. Anything else you need help with?");
+			}
+			if(mark.isTriggered(response)) {
+				chatting = false;//exits the while loop. IMPORTANT you get graded for this!
+				mark.talk(response);
+			}else if(theo.isTriggered(response)){
+				chatting = false;
+				theo.talk(response);
+			}else if(william.isTriggered(response)) {
+				chatting = false;
+				william.talk(response);
+			}else if(devin.isTriggered(response)) {
+				chatting = false;
+				devin.talk(response);
+			}else {
+				ChatbotMain.print("I don't know anything about that.");
 			}
 		}
-		//access variables from other classes
-		ChatbotMain.print("Well, it was nice talking to you," + ChatbotMain.chatbot.getUsername() + "!");
-		ChatbotMain.chatbot.startChatting();
 	}
 
 	@Override
