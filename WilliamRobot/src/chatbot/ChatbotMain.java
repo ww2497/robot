@@ -11,46 +11,54 @@ public class ChatbotMain {
 	public static void main(String[] args) {
 		chatbot.startChatting();
 	}
-
-	public static int findKeyword(String searchString, String keyword, int startPsn) {
-		searchString = searchString.toLowerCase();
-		keyword = keyword.toLowerCase();
-
-		int psn = searchString.indexOf(keyword, startPsn);
-
-		while(psn>= 0) {
-			if(keywordIsIsolated(psn, keyword, searchString)&& noNegations(searchString, psn)) {
-				return psn;
-			}else {
-				psn = searchString.indexOf(keyword, psn+1);///returns index of next keyword
+	
+	public static int findKeyword(String searchString,	String key,	int startIndex) {
+	//delete white space
+	String phrase = searchString.trim();
+	//set all letters to lowercase
+	phrase = phrase.toLowerCase();
+	key = key.toLowerCase();
+		
+	//		System.out.println("The phrase is "+phrase);
+	//		System.out.println("The key is "+key);
+		
+	//find position of key
+	int psn = phrase.indexOf(key);
+	//		System.out.println("The position found is "+psn);
+	//keep looking for the word 
+	//until you find the right context
+	while(psn >= 0){
+		String before = " ";
+		String after = " ";
+		//if the phrase does not end with this word
+		if(psn + key.length() < phrase.length()){
+			after = phrase.substring(psn + key.length(),
+			psn + key.length()+1);
+			//				System.out.println("The character after "
+			//						+ key +" is "+after);
 			}
-
-		}
-		return -1;
-	}
-	public static boolean keywordIsIsolated(int psn, String keyword, String s){
-		int end = keyword.length()+psn;
-		String[] alphabet = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"};
-		if(psn == 0) {
-			for(int i=0;i<alphabet.length;i++){
-				if(s.substring(keyword.length(),keyword.length()+1).toLowerCase().equals(alphabet[i])){
-					return false;
+			//if the phrase does not begin with this word
+			if(psn >0){
+				before = phrase.substring(psn-1,psn).toLowerCase();
+				//				System.out.println("The character before "
+				//						+ key +" is "+before);
+			}
+			if(before.compareTo("a") < 0 && after.compareTo("a") < 0){
+			//				System.out.println(key+" was found at "+psn);
+				if(noNegations(phrase, psn)){
+					return psn;					
 				}
 			}
-
-		}
-		if(psn!=0) {
-		for(int z=0;z<alphabet.length;z++){
-			if(s.substring(psn-1,psn).toLowerCase().equals(alphabet[z])){
-				return false;
-			}
-			if(s.substring(end+1,end+2).toLowerCase().equals(alphabet[z])){
-				return false;
-			}
-		}
-		}
-		return true;
+			//in case the keyword was not found yet,
+			//check the rest of the string
+			psn = phrase.indexOf(key,psn+1);
+			//			System.out.println(key+" was not found. "
+			//					+ "Checking "+psn);
 	}
+		
+		return -1;
+	}
+	 
 
 	public static boolean noNegations(String s, int psn){
 		String[] negations = {"don't", "not"};

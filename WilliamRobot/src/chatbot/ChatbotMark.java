@@ -6,24 +6,22 @@ public class ChatbotMark implements Topic {
 	private String[] boroughs;
 	private String goodbyeKeyword;
 	private String secretKeyword;
-	private String response;
 	private String currentTopic;
 	
 	public ChatbotMark() {
 		String[] temp = {"lower east side","upper east side","chinatown","downtown","flatbush","little italy","east village","park slope","west village","bedford","jamaica","coney island","soho","harlem"};
 		keywords = temp;
-		String[] boroughTemp = {"brooklyn","manhatton","queens","bronx","staten island"};
+		String[] boroughTemp = {"brooklyn","manhattan","queens","bronx","staten island"};
 		boroughs = boroughTemp;
 		goodbyeKeyword = "bye";
 		secretKeyword = "New Amsterdam";
-		response = "";
 		currentTopic = "";
 	}
 
 	@Override
 	public void talk(String response) {
 		ChatbotMain.print("Hey! We in Brooklyn, NYC and I know all the best spots all over the city. You want duh best pizza spot, pssh, fuhgettaboutit. What neighborhood are you in right now?");
-		while(ChatbotMain.chatbot.getLocation().equals("Unknown")) {
+		while(ChatbotMain.chatbot.getLocation().equals("unknown")) {
 			response = ChatbotMain.getInput();
 			response = response.toLowerCase();
 			for(int i = 0; i < keywords.length; i++) {
@@ -33,7 +31,7 @@ public class ChatbotMark implements Topic {
 			}
 			for(int i = 0; i < boroughs.length; i++) {
 				if(ChatbotMain.findKeyword(response, boroughs[i], 0) >= 0) {
-					ChatbotMain.print("Please tell me which neighborhood your in. "+boroughs[i]+" is pretty big!");
+					ChatbotMain.print("Please tell me which neighborhood you're in. "+boroughs[i]+" is pretty big!");
 					response = ChatbotMain.getInput();
 					i = boroughs.length;
 				}
@@ -52,28 +50,14 @@ public class ChatbotMark implements Topic {
 				for(int i = 0; i < keywords.length; i++) {
 					if(ChatbotMain.findKeyword(response, keywords[i], 0) >= 0) {
 						currentTopic = keywords[i];
-					}else {
-						/*
-						 * 
-						 *I know the below section doesn't work. We need to be able to isTriggered each 
-						 * other so we can switch topic.
-						 * 
-						 */
-						if(theo.isTriggered(response)){
-							Chatbot.chatting = false;
-							theo.talk(response);
-						}else if(william.isTriggered(response)) {
-							chatting = false;
-							william.talk(response);
-						}else if(devin.isTriggered(response)) {
-							chatting = false;
-							devin.talk(response);
-						}else {
-							ChatbotMain.print("I don't know anything about that.");
-						}
+						
+					}else{
+						ChatbotMain.chatbot.checkTriggered(response);
 					}
 				}
 			}
+			ChatbotMain.print("I don't know anything about.");
+			response = ChatbotMain.getInput();
 		}
 		//access stuff from other class
 		ChatbotMain.print("Well, it was nice talking to you, "+ChatbotMain.chatbot.getUsername()+"!");

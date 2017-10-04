@@ -21,7 +21,23 @@ public class Chatbot {
 		date = "unknown";
 		chatting = true;
 	}
-		
+	
+	public void checkTriggered(String response) {
+		if(mark.isTriggered(response)) {//exits the while loop. IMPORTANT you get graded for this!
+			mark.talk(response);
+		}else if(theo.isTriggered(response)){
+			theo.talk(response);
+		}else if(william.isTriggered(response)) {
+			william.talk(response);
+		}else if(devin.isTriggered(response)) {
+			devin.talk(response);
+		}
+	}
+	
+	public boolean getChatting() {
+		return chatting;
+	}
+	
 	public String getUsername() {
 		return username;
 	}
