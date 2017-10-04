@@ -5,18 +5,30 @@ private String [] keywords;
 private String goodbyeKeyword;
 private String secretKeyword;
 private String [] responses;
+private String[] yes;
+private String [] brRec;//brookyln
+private String[] mRec;//manhattan
+private String[] qRec;//queens
+private String[] sRec;//Staten Island
+private String[] bRec;//Bronx
 	public ChatbotTheo() {
 		String[] temp = {"food","eat","hungry","restaurants"};
 		keywords = temp;
 		goodbyeKeyword = "bye";
 		secretKeyword = "";
-		String[] asdf = {};
-		responses = asdf;
+		String[] asdf = {"yea","yes","ok","sure"};
+		yes = asdf;
+		String[] br = {"Two bros pizza",""};
 	}
 
 	@Override
 	public void talk(String response) {
 		ChatbotMain.print("Would you like me to recomend somewhere to eat");
+		for(int i=0;i<yes.length;i++) {
+			if(ChatbotMain.findKeyword(response,yes[i] , 0)>=0) {
+				
+			}
+		}
 		while(ChatbotMain.findKeyword(response, goodbyeKeyword, 0)==-1) {
 			if(ChatbotMain.findKeyword(response, secretKeyword, 0)>=0) {
 				ChatbotMain.print("Get dabbed on");
