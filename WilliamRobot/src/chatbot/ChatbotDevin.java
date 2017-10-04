@@ -1,26 +1,39 @@
 package chatbot;
 
+import java.util.Date;
+
 public class ChatbotDevin implements Topic {
 
 	private String[] keywords;
 	private String goodbyeKeyword;
 	private String secretKeyword;
 	private String response;
+	private String agreements;
+	public static void main(String[] args) {
+		Date date = new Date();
+		System.out.println(date.toString());
+	}
+	
 	
 	public ChatbotDevin() {
 		String[] temp = {"stuff","things","whatever","nothing"};
+		agreements = "yes";
 		keywords = temp;
 		goodbyeKeyword = "bye";
 		secretKeyword = "pubg";
 		response = "";
 	}
+	public String getDates() 
+	{
+		//return getDates;
+	}
 	@Override
 	public void talk(String response) {
-		ChatbotMain.print("Hey! So you want to talk about generic boring things, huh? I love talking about that...");
+		ChatbotMain.print("Dates? I know a lot about dates.");
 		response = ChatbotMain.getInput();
 		while(ChatbotMain.findKeyword(response, goodbyeKeyword, 0) == -1) {
-			if(ChatbotMain.findKeyword(response, secretKeyword, 0) >= 0) {
-				ChatbotMain.print("I can't even. I love pubg so much. Wow. You are so cool.");
+			if(ChatbotMain.findKeyword(response, agreements, 0) >= 0) {
+				ChatbotMain.print("Indeed. After all, today's the ");
 				response = ChatbotMain.getInput();
 			}else {
 				ChatbotMain.print("Yeah. That's pretty cool. However, there are things I like even more. Tell me something else.");
@@ -35,7 +48,7 @@ public class ChatbotDevin implements Topic {
 	public boolean isTriggered(String response) {
 		for(int i = 0; i < keywords.length; i++)
 		{
-			//IMPORANT (on the rubric)
+			//IMPORTANT (on the rubric)
 			if(ChatbotMain.findKeyword(response, keywords[i],0) >= 0) {
 				return true;
 			}
