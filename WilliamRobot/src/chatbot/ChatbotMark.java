@@ -11,7 +11,7 @@ public class ChatbotMark implements Topic {
 	public ChatbotMark() {
 		String[] temp = {"lower east side","upper east side","chinatown","downtown","flatbush","little italy","east village","park slope","west village","bedford","jamaica","coney island","soho","harlem"};
 		keywords = temp;
-		String[] boroughTemp = {"brooklyn","manhatton","queens","bronx","staten island"};
+		String[] boroughTemp = {"brooklyn","manhattan","queens","bronx","staten island"};
 		boroughs = boroughTemp;
 		goodbyeKeyword = "bye";
 		secretKeyword = "New Amsterdam";
