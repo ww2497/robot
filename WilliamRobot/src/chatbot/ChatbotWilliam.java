@@ -22,8 +22,8 @@ public class ChatbotWilliam implements Topic {
 		while(chatting) {
 			if(ChatbotMain.findKeyword(response, secretKeyword, 0 ) >= 0) {
 				ChatbotMain.print("Here's a map of the MTA Subway: http://web.mta.info/maps/submap.html. Anything else you need?");
-				response = ChatbotMain.getInput();
 			}
+			response = ChatbotMain.getInput();
 			ChatbotMain.chatbot.checkTriggered(response);
 		}
 	}
