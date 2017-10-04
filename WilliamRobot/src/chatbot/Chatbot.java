@@ -9,49 +9,67 @@ public class Chatbot {
 	private Topic theo;
 	private Topic devin;
 	private String location;
-	private String month;
-	
+	private String date;
 
 	public Chatbot() {
 		william = new ChatbotWilliam();
 		mark = new ChatbotMark();
 		theo = new ChatbotTheo();
 		devin = new ChatbotDevin();
-		location = "Unknown";
-		username = "Unknown User";
+		location = "unknown";
+		username = "unknown user";
+		date = "unknown";
 		chatting = true;
 	}
 		
 	public String getUsername() {
 		return username;
 	}
+	public void setUsername(String name) {
+		username = name;
+	}
 	public String getLocation() {
 		return location;
+	}
+	public void setLocation(String currentLocation) {
+		location = currentLocation;
+	}
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String currentDate) {
+		date = currentDate;
 	}
 	
 	public void startChatting() {
 		ChatbotMain.print("Hi! I am your New York City Tour Bot, please tell me your name?");
 		username = ChatbotMain.getInput();
-		ChatbotMain.print("What borough are you in right now?");
-		location = ChatbotMain.getInput();
-		
 		while(chatting) {
+			
 			ChatbotMain.print("What would you like to talk about?");
 			String response = ChatbotMain.getInput();
-			if(william.isTriggered(response)) {
+			if(response.equals("What would you like to talk about?")) {
+				ChatbotMain.print("Please don't copy me! We can have a conversation instead!");
+				response = ChatbotMain.getInput();
+			}
+			while(response.equals("Please don't copy me! We can have a conversation instead!")){
+				ChatbotMain.print("Please don't copy me! We can have a conversation instead!");
+				response = ChatbotMain.getInput();
+			}
+			if(mark.isTriggered(response)) {
 				chatting = false;//exits the while loop. IMPORTANT you get graded for this!
-				william.talk(response);
-			}else if(mark.isTriggered(response)){
-				chatting = false;
 				mark.talk(response);
-			}else if(theo.isTriggered(response)) {
+			}else if(theo.isTriggered(response)){
 				chatting = false;
 				theo.talk(response);
+			}else if(william.isTriggered(response)) {
+				chatting = false;
+				william.talk(response);
 			}else if(devin.isTriggered(response)) {
 				chatting = false;
 				devin.talk(response);
 			}else {
-				ChatbotMain.print("I don't know anything about that. What else do you want to talk about?");
+				ChatbotMain.print("I don't know anything about that.");
 			}
 		}
 	}
