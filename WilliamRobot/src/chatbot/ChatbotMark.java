@@ -36,7 +36,9 @@ public class ChatbotMark implements Topic {
 					i = boroughs.length;
 				}
 			}
-			ChatbotMain.print("It's funny how I don't know where that is. Please name another more popular neighborhood near where you are.");
+			if(ChatbotMain.chatbot.getLocation().equals("unknown")){
+				ChatbotMain.print("It's funny how I don't know where that is. Please name another more popular neighborhood near where you are.");
+			}
 		}
 		
 		ChatbotMain.print("What do you want to do in "+ChatbotMain.chatbot.getLocation()+"?");
