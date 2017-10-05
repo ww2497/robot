@@ -10,7 +10,7 @@ public class ChatbotDevin implements Topic {
 	private String facts;
 	private String setDestination;
 	
-	
+	//
 	
 	public ChatbotDevin() {
 		String[] temp = {"sightseeing","sightsee","museums","empire state building","statue of liberty"};
