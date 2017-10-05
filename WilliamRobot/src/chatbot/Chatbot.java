@@ -10,6 +10,7 @@ public class Chatbot {
 	private Topic devin;
 	private String location;
 	private String date;
+	private String train;
 
 	public Chatbot() {
 		william = new ChatbotWilliam();
@@ -20,6 +21,7 @@ public class Chatbot {
 		username = "unknown user";
 		date = "unknown";
 		chatting = true;
+		train ="";
 	}
 	
 	public void checkTriggered(String response) {
@@ -56,7 +58,12 @@ public class Chatbot {
 	public void setDate(String currentDate) {
 		date = currentDate;
 	}
-	
+	public void setTrain(String s) {
+		train = s;
+	}
+	public String getTrain() {
+		return train;
+	}
 	public void startChatting() {
 		ChatbotMain.print("Hi! I am your New York City Tour Bot, please tell me your name?");
 		username = ChatbotMain.getInput();
