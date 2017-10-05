@@ -3,33 +3,61 @@ package chatbot;
 public class ChatbotMark implements Topic {
 
 	private String[] keywords;
+	private String[] boroughs;
 	private String goodbyeKeyword;
 	private String secretKeyword;
-	private String response;
+	private String currentTopic;
 	
 	public ChatbotMark() {
-		String[] temp = {"Brooklyn","Manhatton","Queens","Bronx","Staten Island"};
+		String[] temp = {"lower east side","upper east side","chinatown","downtown","flatbush","little italy","east village","park slope","west village","bedford","jamaica","coney island","soho","harlem"};
 		keywords = temp;
+		String[] boroughTemp = {"brooklyn","manhattan","queens","bronx","staten island"};
+		boroughs = boroughTemp;
 		goodbyeKeyword = "bye";
 		secretKeyword = "New Amsterdam";
-		response = "";
+		currentTopic = "";
 	}
 
 	@Override
 	public void talk(String response) {
-		ChatbotMain.print("Hey! We in Brooklyn, NYC and I know all the best spots all over the city. You want duh best pizza spot, pssh, fuhgettaboutit. Where are you right now?");
+		ChatbotMain.print("Hey! We in Brooklyn, NYC and I know all the best spots all over the city. You want duh best pizza spot, pssh, fuhgettaboutit. What neighborhood are you in right now?");
+		while(ChatbotMain.chatbot.getLocation().equals("unknown")) {
+			response = ChatbotMain.getInput();
+			response = response.toLowerCase();
+			for(int i = 0; i < keywords.length; i++) {
+				if(ChatbotMain.findKeyword(response, keywords[i], 0) >= 0) {
+					ChatbotMain.chatbot.setLocation(keywords[i]);
+				}
+			}
+			for(int i = 0; i < boroughs.length; i++) {
+				if(ChatbotMain.findKeyword(response, boroughs[i], 0) >= 0) {
+					ChatbotMain.print("Please tell me which neighborhood you're in. "+boroughs[i]+" is pretty big!");
+					response = ChatbotMain.getInput();
+					i = boroughs.length;
+				}
+			}
+			ChatbotMain.print("It's funny how I don't know where that is. Please name another more popular neighborhood near where you are.");
+		}
+		
+		ChatbotMain.print("What do you want to do in "+ChatbotMain.chatbot.getLocation()+"?");
 		response = ChatbotMain.getInput();
+		
 		while(ChatbotMain.findKeyword(response, goodbyeKeyword, 0 ) == -1) {
 			if(ChatbotMain.findKeyword(response, secretKeyword, 0 ) >= 0) {
-				ChatbotMain.print("Bleep bloop, How did you know i was a robot?!");
+				ChatbotMain.print("Yes! New York was origanilly discovered by the Dutch! The origanal names that the Dutch created are still the ones we use today, such as, Brooklyn, and Manhattan");
 				response = ChatbotMain.getInput();
 			}else {
 				for(int i = 0; i < keywords.length; i++) {
 					if(ChatbotMain.findKeyword(response, keywords[i], 0) >= 0) {
+						currentTopic = keywords[i];
 						
+					}else{
+						ChatbotMain.chatbot.checkTriggered(response);
 					}
 				}
 			}
+			ChatbotMain.print("I don't know anything about.");
+			response = ChatbotMain.getInput();
 		}
 		//access stuff from other class
 		ChatbotMain.print("Well, it was nice talking to you, "+ChatbotMain.chatbot.getUsername()+"!");
