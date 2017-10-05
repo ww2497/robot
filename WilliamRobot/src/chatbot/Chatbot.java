@@ -11,6 +11,7 @@ public class Chatbot {
 	private String location;
 	private String date;
 	private String train;
+	private String destination;
 
 	public Chatbot() {
 		william = new ChatbotWilliam();
@@ -58,11 +59,17 @@ public class Chatbot {
 	public void setDate(String currentDate) {
 		date = currentDate;
 	}
-	public void setTrain(String s) {
-		train = s;
-	}
 	public String getTrain() {
 		return train;
+	}
+	public void setTrain(String currentTrain) {
+		train = currentTrain;
+	}
+	public String getDestination() {
+		return destination;
+	}
+	public void setDestination(String currentDestination) {
+		destination = currentDestination;
 	}
 	public void startChatting() {
 		ChatbotMain.print("Hi! I am your New York City Tour Bot, please tell me your name?");

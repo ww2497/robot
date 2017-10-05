@@ -6,11 +6,12 @@ private String goodbyeKeyword;
 private String secretKeyword;
 private String [] responses;
 private String[] yes;
-private String [] brRec;//brookyln
-private String[] mRec;//manhattan
-private String[] qRec;//queens
-private String[] sRec;//Staten Island
-private String[] bRec;//Bronx
+private String brRec;//brookyln
+private String mRec;//manhattan
+private String qRec;//queens
+private String sRec;//Staten Island
+private String bRec;//Bronx
+private String allRec;
 	public ChatbotTheo() {
 		String[] temp = {"food","eat","hungry","restaurants"};
 		keywords = temp;
@@ -18,7 +19,11 @@ private String[] bRec;//Bronx
 		secretKeyword = "";
 		String[] asdf = {"yea","yes","ok","sure"};
 		yes = asdf;
-		String[] br = {"Two bros pizza",""};
+		brRec = "Two Bros pizza";
+		mRec = "Shake Shack";
+		qRec = "Applebee's";
+		bRec = "Dunkin donuts";
+		sRec= "McDonalds";
 	}
 //
 	@Override
@@ -26,7 +31,9 @@ private String[] bRec;//Bronx
 		ChatbotMain.print("Would you like me to recomend somewhere to eat");
 		for(int i=0;i<yes.length;i++) {
 			if(ChatbotMain.findKeyword(response,yes[i] , 0)>=0) {
-				
+				if(ChatbotMain.chatbot.getLocation().equals("brookyln")) {
+					ChatbotMain.print("You should go to"+brRec+".");
+				}
 			}
 		}
 		while(ChatbotMain.findKeyword(response, goodbyeKeyword, 0)==-1) {
