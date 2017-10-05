@@ -29,7 +29,7 @@ public class ChatbotDevin implements Topic {
 	}
 	@Override
 	public void talk(String response) {
-		ChatbotMain.print("Hey, I know stuff about dates and sight seeing. ");
+		ChatbotMain.print(" ");
 		response = ChatbotMain.getInput();
 		while(ChatbotMain.findKeyword(response, goodbyeKeyword, 0) == -1) {
 			if(ChatbotMain.findKeyword(response, secretKeyword, 0) >= 0) {
