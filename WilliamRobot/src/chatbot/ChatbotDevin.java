@@ -7,34 +7,45 @@ public class ChatbotDevin implements Topic {
 	private String[] keywords;
 	private String goodbyeKeyword;
 	private String secretKeyword;
-	private String response;
-	private String agreements;
-	public static void main(String[] args) {
-		Date date = new Date();
-		
-	}
+	private String facts;
+	private String setDestination;
+	
 	
 	
 	public ChatbotDevin() {
-		String[] temp = {"stuff","things","whatever","nothing"};
-		agreements = "yes";
+		String[] temp = {"sightseeing","sightsee","museums","empire state building","statue of liberty"};
 		keywords = temp;
 		goodbyeKeyword = "bye";
-		secretKeyword = "pubg";
-		response = "";
+		secretKeyword = "date";
+		facts = "facts";
+	}
+	public String getDestinations() {
+		return setDestination;
 	}
 	public String getDates() 
 	{
-		//return getDates;dd
+		Date date = new Date();
+		return date.toString();
 	}
 	@Override
 	public void talk(String response) {
-		ChatbotMain.print("Dates? I know a lot about dates.");
+		ChatbotMain.print("Hey, I know stuff about dates and sight seeing. ");
 		response = ChatbotMain.getInput();
 		while(ChatbotMain.findKeyword(response, goodbyeKeyword, 0) == -1) {
-			if(ChatbotMain.findKeyword(response, agreements, 0) >= 0) {
-				ChatbotMain.print("Indeed. After all, today's the ");
+			if(ChatbotMain.findKeyword(response, secretKeyword, 0) >= 0) {
+				ChatbotMain.print("Oh, you want to go to the statue of liberty?");
+				//if yes
+				ChatbotMain.print("Type in 'facts' if you want to know more about the Statue of Liberty. Type in 'directions' if you need directions to the Statue of Liberty.");
 				response = ChatbotMain.getInput();
+				ChatbotMain.chatbot.checkTriggered(response);
+				
+				ChatbotMain.chatbot.setDestination("statue of liberty");
+				response = ChatbotMain.getInput();
+			}
+			if(ChatbotMain.findKeyword(response, secretKeyword, 0) >= 0) {
+				ChatbotMain.print(" ");
+				response = ChatbotMain.getInput();
+				
 			}else {
 				ChatbotMain.print("Yeah. That's pretty cool. However, there are things I like even more. Tell me something else.");
 				response = ChatbotMain.getInput();
