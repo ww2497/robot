@@ -65,6 +65,7 @@ public class Chatbot {
 	public void setTrain(String currentTrain) {
 		train = currentTrain;
 	}
+	
 	public String getDestination() {
 		return destination;
 	}

@@ -29,11 +29,19 @@ private String allRec;
 	@Override
 	public void talk(String response) {
 		ChatbotMain.print("Would you like me to recomend somewhere to eat");
+		response= ChatbotMain.getInput();
 		for(int i=0;i<yes.length;i++) {
 			if(ChatbotMain.findKeyword(response,yes[i] , 0)>=0) {
 				if(ChatbotMain.chatbot.getLocation().equals("brookyln")) {
-					ChatbotMain.print("You should go to"+brRec+".");
+					ChatbotMain.print("You should go to "+brRec+".");
 				}
+				if(ChatbotMain.chatbot.getLocation().equals("bronx")) {
+					ChatbotMain.print("You should go to "+bRec+".")
+				}
+				if(ChatbotMain.chatbot.getLocation().equals("queens")) {
+					ChatbotMain.print
+				}
+				ChatbotMain.print("test test");
 			}
 		}
 		while(ChatbotMain.findKeyword(response, goodbyeKeyword, 0)==-1) {
