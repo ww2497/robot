@@ -3,48 +3,54 @@ package chatbot;
 public class ChatbotWilliam implements Topic {
 
 	private String[] keywords;
-	private String goodbyeKeyword;
-	private String secretKeyword;
+	private String[] decline;
+	private String[] lost;
 	private String response;
+	private String goodByeKeyword;
 	private boolean chatting;
 	private static String train;
 	private static String destination;
 	
 	public ChatbotWilliam() {
-		String[] temp = {"where is", "get there", "directions", "go to"};
-		keywords = temp;
-		secretKeyword = "lost";
+		String[] directions = {"where is", "get there", "go there", "go to", "get to", "directions"};
+		keywords = directions;
+		String[] no = {"no", "nah", "nope", "im good", "i'm good"};
+		decline = no;
+		String[] help = {"lost", "map", "how do i", "where is"};
+		lost = help;
+		String[] togo = {"statue of liberty", "map", "how do i", "where is"};
+		lost = help;
 		response = "";
 		chatting = true;
 	}
 	@Override
 	public void talk(String response) {
-		if(ChatbotMain.chatbot.getDestination().equals("statue of liberty")) {
-			ChatbotMain.print("You can get to the Statue of Liberty via "+ getTrain() + ".");
+			ChatbotMain.print("Take the " + ChatbotMain.chatbot.getTrain() + " train to get to " + ChatbotMain.chatbot.getDestination() + ". Anything else you need, " + ChatbotMain.chatbot.getUsername() + "?");
 			response = ChatbotMain.getInput();
-		}
-		else if(ChatbotMain.chatbot.getDestination().equals("empire state building")){
-			ChatbotMain.print("Take the " + ChatbotMain.chatbot.getTrain() + " train to get to " + ChatbotMain.chatbot.getDestination() + ". Anything else you need?");
-			response = ChatbotMain.getInput();
-		}
-		else {
-			ChatbotMain.print("Take the " + ChatbotMain.chatbot.getTrain() + " train to get to " + ChatbotMain.chatbot.getDestination() + ". Anything else you need?");
-			response = ChatbotMain.getInput();
-		}
-		while(chatting) {
-			if(ChatbotMain.findKeyword(response, "no", 0) >= 0) {
-				chatting = false;
+		while(ChatbotMain.findKeyword(response, goodByeKeyword, 0) == -1) {
+			for(int i = 0; i < decline.length; i++) {
+				if(ChatbotMain.findKeyword(response, decline[i], 0) >= 0) {
+					ChatbotMain.print("Alright. Say 'sightseeing' or 'food' to summon the sightseeing bot or foodbot respectively.");
+					response = ChatbotMain.getInput();
+					ChatbotMain.chatbot.checkTriggered(response);
+				}
 			}
-			else if(ChatbotMain.findKeyword(response, "lost", 0) >= 0 || ChatbotMain.findKeyword(response, "map", 0) >= 0) {
-				ChatbotMain.print("Here's a map of the MTA Subway: http://web.mta.info/maps/submap.html. Anything else you need?");
-			}
-			else if() {
-				
+			for(int i = 0; i < lost.length; i++) {
+				if(ChatbotMain.findKeyword(response, lost[i], 0) >= 0) {
+					ChatbotMain.print("Here's a map of the MTA Subway: http://web.mta.info/maps/submap.html. Did that help?");
+					response = ChatbotMain.getInput();
+					if(response == "no" || response == "nah" || response == "not really")
+					{
+						ChatbotMain.print("I'm sorry to hear that.");
+					}
+				}
 			}
 			response = ChatbotMain.getInput();
 			ChatbotMain.chatbot.checkTriggered(response);
 		}
+		ChatbotMain.print("Say , "+ChatbotMain.chatbot.getUsername()+"!");
 		ChatbotMain.chatbot.checkTriggered(response);
+		ChatbotMain.chatbot.startChatting();
 	}
 
 	@Override
