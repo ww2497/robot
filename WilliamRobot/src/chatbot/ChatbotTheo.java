@@ -22,7 +22,7 @@ private String allRec;
 		brRec = "Two Bros pizza";
 		mRec = "Shake Shack";
 		qRec = "Applebee's";
-		bRec = "Dunkin donuts";
+		bRec = "Dunkin donuts";//
 		sRec= "McDonalds";
 	}
 //
