@@ -8,15 +8,15 @@ public class ChatbotDevin implements Topic {
 	private String goodbyeKeyword;
 	private String secretKeyword;
 	private String facts;
-	private String setDestination;
+	
 	
 	//
 	
 	public ChatbotDevin() {
-		String[] temp = {"dates","time"};
+		String[] temp = {"dates","events"};
 		keywords = temp;
 		goodbyeKeyword = "bye";
-		secretKeyword = "event";
+		secretKeyword = "time";
 		facts = "facts";
 	}
 
@@ -27,7 +27,7 @@ public class ChatbotDevin implements Topic {
 	}
 	@Override
 	public void talk(String response) {
-		ChatbotMain.print("Hello! I am the NYC event robot! Feel free to ask me any questions! ");
+		ChatbotMain.print("Events? What events do you want to know?");
 		response = ChatbotMain.getInput();
 		while(ChatbotMain.findKeyword(response, goodbyeKeyword, 0) == -1) {
 			if(ChatbotMain.findKeyword(response, secretKeyword, 0) >= 0) {
@@ -35,7 +35,7 @@ public class ChatbotDevin implements Topic {
 				response = ChatbotMain.getInput();
 				
 			}else {
-				ChatbotMain.print("");
+				ChatbotMain.print("?0");
 				response = ChatbotMain.getInput();
 			}
 		}
