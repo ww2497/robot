@@ -13,15 +13,13 @@ public class ChatbotDevin implements Topic {
 	//
 	
 	public ChatbotDevin() {
-		String[] temp = {"dates","time","events"};
+		String[] temp = {"dates","time"};
 		keywords = temp;
 		goodbyeKeyword = "bye";
-		secretKeyword = "";
+		secretKeyword = "event";
 		facts = "facts";
 	}
-	public String getDestinations() {
-		return setDestination;
-	}
+
 	public String getDates() 
 	{
 		Date date = new Date();
@@ -33,7 +31,7 @@ public class ChatbotDevin implements Topic {
 		response = ChatbotMain.getInput();
 		while(ChatbotMain.findKeyword(response, goodbyeKeyword, 0) == -1) {
 			if(ChatbotMain.findKeyword(response, secretKeyword, 0) >= 0) {
-				ChatbotMain.print(" ");
+				ChatbotMain.print("Here's the date: "+getDates()+" ");
 				response = ChatbotMain.getInput();
 				
 			}else {
