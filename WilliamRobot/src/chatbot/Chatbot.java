@@ -25,16 +25,21 @@ public class Chatbot {
 		train ="";
 	}
 	
-	public void checkTriggered(String response) {
+	public boolean checkTriggered(String response) {
 		if(mark.isTriggered(response)) {//exits the while loop. IMPORTANT you get graded for this!
 			mark.talk(response);
+			return true;
 		}else if(theo.isTriggered(response)){
 			theo.talk(response);
+			return true;
 		}else if(william.isTriggered(response)) {
 			william.talk(response);
+			return true;
 		}else if(devin.isTriggered(response)) {
 			devin.talk(response);
+			return true;
 		}
+		return false;
 	}
 	
 	public boolean getChatting() {
