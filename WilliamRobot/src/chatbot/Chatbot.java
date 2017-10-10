@@ -104,6 +104,8 @@ public class Chatbot {
 			}
 		}
 	}
-
+	public void startMark(String s) {
+		mark.talk(s);
+	}
 
 }

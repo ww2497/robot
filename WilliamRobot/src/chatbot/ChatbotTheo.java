@@ -11,7 +11,7 @@ private String mRec;//manhattan
 private String qRec;//queens
 private String sRec;//Staten Island
 private String bRec;//Bronx
-private String allRec;
+private boolean rec;
 	public ChatbotTheo() {
 		String[] temp = {"food","eat","hungry","restaurants"};
 		keywords = temp;
@@ -24,27 +24,61 @@ private String allRec;
 		qRec = "Applebee's";
 		bRec = "Dunkin donuts";//
 		sRec= "McDonalds";
+		rec=false;
 	}
 //
 	@Override
 	public void talk(String response) {
+		if(rec==false) {
 		ChatbotMain.print("Would you like me to recomend somewhere to eat");
 		response= ChatbotMain.getInput();
 		for(int i=0;i<yes.length;i++) {
 			if(ChatbotMain.findKeyword(response,yes[i] , 0)>=0) {
 				if(ChatbotMain.chatbot.getLocation().equals("brookyln")) {
 					ChatbotMain.print("You should go to "+brRec+".");
+					ChatbotMain.chatbot.setDestination(brRec);
+					ChatbotMain.chatbot.setTrain("A");
+					rec = true;
 				}
 				if(ChatbotMain.chatbot.getLocation().equals("bronx")) {
-					ChatbotMain.print("You should go to "+bRec+".")
+					ChatbotMain.print("You should go to "+bRec+".");
+					ChatbotMain.chatbot.setDestination(bRec);
+					ChatbotMain.chatbot.setTrain("A");
+					rec = true;
 				}
 				if(ChatbotMain.chatbot.getLocation().equals("queens")) {
-					ChatbotMain.print
+					ChatbotMain.print("You should go to "+qRec+".");
+					ChatbotMain.chatbot.setDestination(qRec);
+					ChatbotMain.chatbot.setTrain("A");
+					rec = true;
 				}
-				ChatbotMain.print("test test");
+				if(ChatbotMain.chatbot.getLocation().equals("staten island")) {
+					ChatbotMain.print("You should go to "+sRec+".");
+					ChatbotMain.chatbot.setDestination(sRec);
+					ChatbotMain.chatbot.setTrain("A");
+					rec = true;
+				}
+				if(ChatbotMain.chatbot.getLocation().equals("manhattan")) {
+					ChatbotMain.print("You should go to "+mRec+".");
+					ChatbotMain.chatbot.setDestination(mRec);
+					ChatbotMain.chatbot.setTrain("A");
+					rec = true;
+				}
+				if(ChatbotMain.chatbot.getLocation().equals("unknown"))
+				ChatbotMain.print("I don't know where you are you are could you tell me what borough your in");
+				response = ChatbotMain.getInput();
+				ChatbotMain.chatbot.startMark(response);
+				return;
+				
+			}
+			else {
+				ChatbotMain.print("ok I will not recomend somewhere for you to eat");
+				rec = true;
 			}
 		}
+		}
 		while(ChatbotMain.findKeyword(response, goodbyeKeyword, 0)==-1) {
+			
 			if(ChatbotMain.findKeyword(response, secretKeyword, 0)>=0) {
 				ChatbotMain.print("Get dabbed on");
 			}
