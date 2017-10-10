@@ -5,6 +5,7 @@ public class ChatbotWilliam implements Topic {
 	private String[] keywords;
 	private String[] decline;
 	private String[] lost;
+	private String[] repeat;
 	private String response;
 	private String goodByeKeyword;
 	private boolean chatting;
@@ -18,8 +19,8 @@ public class ChatbotWilliam implements Topic {
 		decline = no;
 		String[] help = {"lost", "map", "how do i", "where is"};
 		lost = help;
-		String[] togo = {"statue of liberty", "map", "how do i", "where is"};
-		lost = help;
+		String[] again = {"repeat", "again", "directions", "train"};
+		repeat = again;
 		response = "";
 		chatting = true;
 	}
@@ -27,12 +28,11 @@ public class ChatbotWilliam implements Topic {
 	public void talk(String response) {
 			ChatbotMain.print("Take the " + ChatbotMain.chatbot.getTrain() + " train to get to " + ChatbotMain.chatbot.getDestination() + ". Anything else you need, " + ChatbotMain.chatbot.getUsername() + "?");
 			response = ChatbotMain.getInput();
-		while(ChatbotMain.findKeyword(response, goodByeKeyword, 0) == -1) {
+		while(chatting) {
 			for(int i = 0; i < decline.length; i++) {
 				if(ChatbotMain.findKeyword(response, decline[i], 0) >= 0) {
 					ChatbotMain.print("Alright. Say 'sightseeing' or 'food' to summon the sightseeing bot or foodbot respectively.");
-					response = ChatbotMain.getInput();
-					ChatbotMain.chatbot.checkTriggered(response);
+					chatting = false;
 				}
 			}
 			for(int i = 0; i < lost.length; i++) {
@@ -43,12 +43,21 @@ public class ChatbotWilliam implements Topic {
 					{
 						ChatbotMain.print("I'm sorry to hear that.");
 					}
+					if(response == "yes" || response == "yeah" || response == "somewhat")
+					{
+						ChatbotMain.print("I'm glad to hear that.");
+					}
+				}
+			}
+			for(int i = 0; i < repeat.length; i++) {
+				if(ChatbotMain.findKeyword(response, repeat[i], 0) >= 0) {
+					ChatbotMain.print("Take the " + ChatbotMain.chatbot.getTrain() + " train to get to " + ChatbotMain.chatbot.getDestination() + ". Anything else you need, " + ChatbotMain.chatbot.getUsername() + "?");
 				}
 			}
 			response = ChatbotMain.getInput();
 			ChatbotMain.chatbot.checkTriggered(response);
 		}
-		ChatbotMain.print("Say , "+ChatbotMain.chatbot.getUsername()+"!");
+		response = ChatbotMain.getInput();
 		ChatbotMain.chatbot.checkTriggered(response);
 		ChatbotMain.chatbot.startChatting();
 	}
