@@ -19,10 +19,10 @@ private boolean rec;
 		secretKeyword = "";
 		String[] asdf = {"yea","yes","ok","sure"};
 		yes = asdf;
-		brRec = "Two Bros pizza";
-		mRec = "Shake Shack";
-		qRec = "Applebee's";
-		bRec = "Dunkin donuts";//
+		brRec = "Nathan's famous";
+		mRec = "Katz Delicatessen";
+		qRec = "HinoMaru Ramen's";
+		bRec = "Brook Luncheonette";//
 		sRec= "McDonalds";
 		rec=false;
 	}
@@ -37,19 +37,19 @@ private boolean rec;
 				if(ChatbotMain.chatbot.getLocation().equals("brookyln")) {
 					ChatbotMain.print("You should go to "+brRec+".");
 					ChatbotMain.chatbot.setDestination(brRec);
-					ChatbotMain.chatbot.setTrain("A");
+					ChatbotMain.chatbot.setTrain("Q");
 					rec = true;
 				}
 				if(ChatbotMain.chatbot.getLocation().equals("bronx")) {
 					ChatbotMain.print("You should go to "+bRec+".");
 					ChatbotMain.chatbot.setDestination(bRec);
-					ChatbotMain.chatbot.setTrain("A");
+					ChatbotMain.chatbot.setTrain("6");
 					rec = true;
 				}
 				if(ChatbotMain.chatbot.getLocation().equals("queens")) {
 					ChatbotMain.print("You should go to "+qRec+".");
 					ChatbotMain.chatbot.setDestination(qRec);
-					ChatbotMain.chatbot.setTrain("A");
+					ChatbotMain.chatbot.setTrain("W");
 					rec = true;
 				}
 				if(ChatbotMain.chatbot.getLocation().equals("staten island")) {
@@ -61,7 +61,7 @@ private boolean rec;
 				if(ChatbotMain.chatbot.getLocation().equals("manhattan")) {
 					ChatbotMain.print("You should go to "+mRec+".");
 					ChatbotMain.chatbot.setDestination(mRec);
-					ChatbotMain.chatbot.setTrain("A");
+					ChatbotMain.chatbot.setTrain("F");
 					rec = true;
 				}
 				if(ChatbotMain.chatbot.getLocation().equals("unknown"))
