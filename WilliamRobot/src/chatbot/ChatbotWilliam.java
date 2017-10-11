@@ -24,15 +24,23 @@ public class ChatbotWilliam implements Topic {
 		response = "";
 		chatting = true;
 	}
-	@Override
 	public void talk(String response) {
-			ChatbotMain.print("Take the " + ChatbotMain.chatbot.getTrain() + " train to get to " + ChatbotMain.chatbot.getDestination() + ". Anything else you need, " + ChatbotMain.chatbot.getUsername() + "?");
+		if(ChatbotMain.chatbot.getDestination() != null) {	
+		ChatbotMain.print("Take the " + ChatbotMain.chatbot.getTrain() + " train to get to " + ChatbotMain.chatbot.getDestination() + ". Anything else you need, " + ChatbotMain.chatbot.getUsername() + "?");
 			response = ChatbotMain.getInput();
-		while(chatting) {
+		}else {
+			
+		}
+		A: while(chatting) {
 			for(int i = 0; i < decline.length; i++) {
 				if(ChatbotMain.findKeyword(response, decline[i], 0) >= 0) {
 					ChatbotMain.print("Alright. Say 'sightseeing' or 'food' to summon the sightseeing bot or foodbot respectively.");
-					chatting = false;
+					response = ChatbotMain.getInput();
+					if(ChatbotMain.chatbot.checkTriggered(response)) {
+//						ChatbotMain.chatbot.checkTriggered(response);
+						chatting = false;
+						break A;
+					}
 				}
 			}
 			for(int i = 0; i < lost.length; i++) {
@@ -43,9 +51,13 @@ public class ChatbotWilliam implements Topic {
 					{
 						ChatbotMain.print("I'm sorry to hear that.");
 					}
-					if(response == "yes" || response == "yeah" || response == "somewhat")
+					else if(response == "yes" || response == "yeah" || response == "somewhat")
 					{
 						ChatbotMain.print("I'm glad to hear that.");
+					}
+					else 
+					{
+						ChatbotMain.print("Uh... Okay. Anything else you need?");
 					}
 				}
 			}
@@ -57,6 +69,7 @@ public class ChatbotWilliam implements Topic {
 			response = ChatbotMain.getInput();
 			ChatbotMain.chatbot.checkTriggered(response);
 		}
+		
 		response = ChatbotMain.getInput();
 		ChatbotMain.chatbot.checkTriggered(response);
 		ChatbotMain.chatbot.startChatting();
