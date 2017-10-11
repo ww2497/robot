@@ -70,7 +70,7 @@ private boolean rec;
 				ChatbotMain.chatbot.startMark(response);
 				return;
 				
-			}
+			}//
 			else {
 				ChatbotMain.print("ok I will not recomend somewhere for you to eat");
 				rec = true;
