@@ -24,7 +24,6 @@ public class ChatbotWilliam implements Topic {
 		response = "";
 		chatting = true;
 	}
-	@Override
 	public void talk(String response) {
 		if(ChatbotMain.chatbot.getDestination() != null) {	
 		ChatbotMain.print("Take the " + ChatbotMain.chatbot.getTrain() + " train to get to " + ChatbotMain.chatbot.getDestination() + ". Anything else you need, " + ChatbotMain.chatbot.getUsername() + "?");
