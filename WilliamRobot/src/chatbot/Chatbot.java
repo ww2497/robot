@@ -78,10 +78,14 @@ public class Chatbot {
 		destination = currentDestination;
 	}
 	public void startChatting() {
-		ChatbotMain.print("Hi! I am your New York City Tour Bot, please tell me your name?");
-		username = ChatbotMain.getInput();
+		if(username == "unknown user") {
+			ChatbotMain.print("Hi! I am your New York City Tour Bot. Tell me your name?");
+			username = ChatbotMain.getInput();
+		}
+		else {
+			ChatbotMain.print("Hi! I am your New York City Tour Bot!");
+		}
 		while(chatting) {
-			
 			ChatbotMain.print("What would you like to talk about?");
 			String response = ChatbotMain.getInput();
 			if(response.equals("What would you like to talk about?")) {
