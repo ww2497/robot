@@ -1,7 +1,9 @@
 package chatbot;
 
 import java.util.Date;
-
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 public class ChatbotDevin implements Topic {
 
 	private String[] keywords;
@@ -25,6 +27,17 @@ public class ChatbotDevin implements Topic {
 		Date date = new Date();
 		return date.toString();
 	}
+	public String getCal()
+	{
+		Calendar cal = Calendar.getInstance();
+		cal.set(2017, 9, 16);//0 for Jan, 1 for Feb, etc...
+		cal.add(Calendar.MONTH, 2); // You can -/+ x months here to go back in history or move forward.
+		SimpleDateFormat dt = new SimpleDateFormat("MM/dd/yy"); 
+		long onedayago = cal.getTime().getTime() - 24 * 60 * 60 * 1000;
+		cal.setTime(new Date(onedayago));
+		//System.out.println(dt.format(cal.getTime()));
+		return dt.format(cal.getTime()); // New date
+	}
 	@Override
 	public void talk(String response) {
 		ChatbotMain.print("Events? What events do you want to know?");
@@ -35,7 +48,7 @@ public class ChatbotDevin implements Topic {
 				response = ChatbotMain.getInput();
 				
 			}else {
-				ChatbotMain.print("?0");
+				ChatbotMain.print(""+getCal()+"");
 				response = ChatbotMain.getInput();
 			}
 		}
