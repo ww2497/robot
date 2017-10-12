@@ -6,7 +6,14 @@ public class ChatbotWilliam implements Topic {
 	private String[] decline;
 	private String[] lost;
 	private String[] repeat;
+	private String response;
+	private String goodByeKeyword;
+	private String repeating;
 	private boolean chatting;
+	private boolean saidSomething;
+	private static String train;
+	private static String destination;
+	
 	
 	public ChatbotWilliam() {
 		String[] directions = {"where is", "get there", "go there", "go to", "get to", "directions"};
@@ -17,30 +24,38 @@ public class ChatbotWilliam implements Topic {
 		lost = help;
 		String[] again = {"repeat", "again", "directions", "train"};
 		repeat = again;
+		repeating = "";
+		response = "";
 		chatting = true;
 	}
 	public void talk(String response) {
-		chatting = true;
-		if(ChatbotMain.chatbot.getDestination() == "unknown") {	
-		ChatbotMain.print("Where do you want to go?");
+		if(ChatbotMain.chatbot.getDestination() != null) {	
+			ChatbotMain.print("Hi, I'm the transportation bot. You can take the " + ChatbotMain.chatbot.getTrain() + " train to get to " + ChatbotMain.chatbot.getDestination() + ". Anything else you need, " + ChatbotMain.chatbot.getUsername() + "?");
 			response = ChatbotMain.getInput();
-		ChatbotMain.print("Take the " + ChatbotMain.chatbot.getTrain() + " train to get to " + ChatbotMain.chatbot.getDestination() + ". Anything else you need, " + ChatbotMain.chatbot.getUsername() + "?");
+		}else {
+			ChatbotMain.print("Transportation bot here: I'm not quite sure how to get there, sorry. Is there anything else I can help you with?");
 			response = ChatbotMain.getInput();
-		}else if(ChatbotMain.chatbot.getLocation().equals("unknown")){
-			ChatbotMain.print("Okay, but first I need to know where you are right now. What neighborhood are you in right now?");
-			response = ChatbotMain.getInput();
-			ChatbotMain.chatbot.setLocation(response);
 		}
-		while(chatting) {
+		A: while(chatting) {
+			saidSomething = false;
+			if(repeating.equals(response)) {
+				ChatbotMain.print("Repeating yourself doesn't get the point across any better. Is there anything else I can help you with?");
+				saidSomething = true;
+			}
+			repeating = response;
 			for(int i = 0; i < decline.length; i++) {
 				if(ChatbotMain.findKeyword(response, decline[i], 0) >= 0) {
-					ChatbotMain.print("Alright. Say 'sightseeing' or 'food' to summon the sightseeing bot or foodbot respectively.");
+					ChatbotMain.print("Alright. You can say 'events' or 'food' to summon the events bot or foodbot respectively.");
 					response = ChatbotMain.getInput();
 					if(ChatbotMain.chatbot.checkTriggered(response)) {
-//						ChatbotMain.chatbot.checkTriggered(response);
 						chatting = false;
-						break;
+						break A;
 					}
+					else
+					{
+						ChatbotMain.print("I am only programmed to respond to food and tourism related inquiries. Could you try again, " + ChatbotMain.chatbot.getUsername() + "?");
+					}
+					saidSomething = true;
 				}
 			}
 			for(int i = 0; i < lost.length; i++) {
@@ -59,15 +74,19 @@ public class ChatbotWilliam implements Topic {
 					{
 						ChatbotMain.print("Uh... Okay. Anything else you need?");
 					}
+					saidSomething = true;
 				}
 			}
 			for(int i = 0; i < repeat.length; i++) {
 				if(ChatbotMain.findKeyword(response, repeat[i], 0) >= 0) {
 					ChatbotMain.print("Take the " + ChatbotMain.chatbot.getTrain() + " train to get to " + ChatbotMain.chatbot.getDestination() + ". Anything else you need, " + ChatbotMain.chatbot.getUsername() + "?");
+					saidSomething = true;
 				}
 			}
+			if(!saidSomething) {
+				ChatbotMain.print("I didn't quite catch that. Is there something other than that I could help you with?");
+			}
 			response = ChatbotMain.getInput();
-			ChatbotMain.chatbot.checkTriggered(response);
 		}
 		
 		response = ChatbotMain.getInput();
@@ -77,7 +96,6 @@ public class ChatbotWilliam implements Topic {
 
 	@Override
 	public boolean isTriggered(String response) {
-		// TODO Auto-generated method stub
 		for(int i = 0; i < keywords.length; i++) {
 			//IMPORTANT (on the rubic)
 			if(ChatbotMain.findKeyword(response, keywords[i], 0) >= 0) {
