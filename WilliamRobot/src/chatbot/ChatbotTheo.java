@@ -18,6 +18,7 @@ public class ChatbotTheo implements Topic {
 	private String ciRec;
 	private String shRec;
 	private String hRec;
+	private String pizza;
 	private boolean rec;
 	
 	public ChatbotTheo() {
@@ -28,6 +29,7 @@ public class ChatbotTheo implements Topic {
 		goodbyeKeyword = "bye";
 		String[] asdf = {"yea","yes","ok","sure","ye","y","yeah"};
 		yes = asdf;
+		pizza="pizza";
 		lesRec = "Balvanera";
 		uesRec = "Up Thai";
 		cRec = "Joe's Shanghai's";
@@ -164,8 +166,13 @@ public class ChatbotTheo implements Topic {
 				}
 				rec = true;
 			}
-			if(ChatbotMain.findKeyword(response, goodbyeKeyword, 0)==-1) {
+			while(ChatbotMain.findKeyword(response, goodbyeKeyword, 0)!=-1) {
+				if(ChatbotMain.findKeyword(response,pizza, 0)>=0) {
+					ChatbotMain.print("New York is well known for it pizza that is usualy made with hand tossed crust and sold in slices.");
+				}
+				else {
 				ChatbotMain.print("If that is all please say 'bye'.");
+				}
 			}
 		}
 		ChatbotMain.print("Well, it was nice talking to you "+ChatbotMain.chatbot.getUsername()+"!");
