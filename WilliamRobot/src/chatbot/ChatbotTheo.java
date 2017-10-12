@@ -4,6 +4,7 @@ public class ChatbotTheo implements Topic {
 	private String [] keywords;
 	private String goodbyeKeyword;
 	private String[] yes;
+	private String[] neighborhoods;
 	private String lesRec;
 	private String uesRec;
 	private String cRec;
@@ -22,6 +23,8 @@ public class ChatbotTheo implements Topic {
 	public ChatbotTheo() {
 		String[] temp = {"food","eat","hungry","restaurants"};
 		keywords = temp;
+		String[] localTemp = {"lower east side","upper east side","chinatown","flatbush","little italy","east village","park slope","west village","bedford","jamaica","coney island","soho","harlem"};
+		neighborhoods = localTemp;
 		goodbyeKeyword = "bye";
 		String[] asdf = {"yea","yes","ok","sure","ye","y","yeah"};
 		yes = asdf;
@@ -46,10 +49,18 @@ public class ChatbotTheo implements Topic {
 		while(ChatbotMain.findKeyword(response, goodbyeKeyword, 0)==-1) {
 			rec=false;
 			while(rec==false) {
-				if(ChatbotMain.chatbot.getLocation().equals("unknown")) {
+				while(ChatbotMain.chatbot.getLocation().equals("unknown")) {
 					ChatbotMain.print("I don't know where you are. Please tell me what neighborhood you're in now.");
 					response = ChatbotMain.getInput();
-					ChatbotMain.chatbot.setLocation(response);
+					for(int i = 0; i < neighborhoods.length; i++) {
+						if(ChatbotMain.findKeyword(response, neighborhoods[i], 0) >= 0) {
+							ChatbotMain.chatbot.setLocation(neighborhoods[i]);
+							i = neighborhoods.length;
+						}
+					}
+					if(ChatbotMain.chatbot.getLocation().equals("unknown")) {
+						ChatbotMain.print("Make sure you typed the name of the WELL KNOWN neighborhood correctly!");
+					}
 				}
 				ChatbotMain.print("Would you like me to recomend somewhere to eat?");
 				response= ChatbotMain.getInput();
@@ -153,9 +164,11 @@ public class ChatbotTheo implements Topic {
 				}
 				rec = true;
 			}
-			ChatbotMain.print("If that is all please say 'bye'.");
+			if(ChatbotMain.findKeyword(response, goodbyeKeyword, 0)==-1) {
+				ChatbotMain.print("If that is all please say 'bye'.");
+			}
 		}
-		ChatbotMain.print("Well, it was nice talking to you"+ChatbotMain.chatbot.getUsername()+"!");
+		ChatbotMain.print("Well, it was nice talking to you "+ChatbotMain.chatbot.getUsername()+"!");
 		ChatbotMain.chatbot.startChatting();
 	}
 	public boolean isTriggered(String response) {
