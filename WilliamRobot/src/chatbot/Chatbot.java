@@ -112,14 +112,15 @@ public class Chatbot {
 			}else if(theo.isTriggered(response)){
 				chatting = false;
 				theo.talk(response);
-			}else if(william.isTriggered(response)) {
-				chatting = false;
-				devin.talk(response);
 			}
 			else if(devin.isTriggered(response)) {
 				chatting = false;
 				devin.talk(response);
-			}else {
+			}else if(william.isTriggered(response)) {
+				chatting = false;
+				william.talk(response);
+			}
+			else {
 				ChatbotMain.print("Sorry, I'm a very primitive tour bot model, programmed only to respond to inquiries about food and local events. Please try again; what do you want to do?");
 			}
 		}
