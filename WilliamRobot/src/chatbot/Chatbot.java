@@ -88,40 +88,43 @@ public class Chatbot {
 	public void startChatting() {
 		chatting = true;
 		if(username == "unknown") {
-			ChatbotMain.print("Hi! I am your New York City Tour Bot. What is your name?");
+			ChatbotMain.print("Hi! I am your New York City Tour Bot. What's your name?");
 			username = ChatbotMain.getInput();
+			ChatbotMain.print("Okay, " + ChatbotMain.chatbot.getUsername() + ". I know a lot about New York City. You could learn about neighborhoods in the city, delicious places to eat, how to get somewhere or what events are going on in those neighborhoods. What do you want to do?");
 		}
-		ChatbotMain.print("Okay, "+ChatbotMain.chatbot.getUsername()+". I know a lot about New York City. You could learn about neighborhoods in the city, whats good to eat, how to get somewhere or what events are going on in those neighborhoods. What do you want to do?");
+		else {
+			ChatbotMain.print("Hi! New York City Tour Bot here. What do you want to do?");
+		}
 		while(chatting) {
 			String response = ChatbotMain.getInput();
-			//This if else is to prevent copying the bot, otherwise the user is stuck in the loop
-			if(response.equals("Nice to meet you "+ChatbotMain.chatbot.getUsername()+". I know a lot about New York City. You could learn about neighborhoods in the city, whats good to eat, how to get somewhere or what events are going on in those neighborhoods. What do you want to do?")) {
+			if(response.equals("Nice to meet you "+ChatbotMain.chatbot.getUsername()+". I know a lot about New York City. You could learn about neighborhoods in the city, delicious places to eat, how to get somewhere or what events are going on in those neighborhoods. What do you want to do?")) {
 				ChatbotMain.print("Please don't copy me! We can have a conversation instead!");
 				response = ChatbotMain.getInput();
+				while(response.equals("Please don't copy me! We can have a conversation instead!")){
+					ChatbotMain.print("Please don't copy me! We can have a conversation instead!");
+					response = ChatbotMain.getInput();
+				}
 			}
-			while(response.equals("Please don't copy me! We can have a conversation instead!")){
-				ChatbotMain.print("Please don't copy me! We can have a conversation instead!");
-				response = ChatbotMain.getInput();
-			}
+
 			if(mark.isTriggered(response)) {
-				chatting = false;//exits the while loop. IMPORTANT you get graded for this!
+				chatting = false;
 				mark.talk(response);
 			}else if(theo.isTriggered(response)){
 				chatting = false;
 				theo.talk(response);
-			}else if(william.isTriggered(response)) {
-				chatting = false;
-				william.talk(response);
 			}else if(devin.isTriggered(response)) {
 				chatting = false;
 				devin.talk(response);
 			}else {
-				ChatbotMain.print("I don't know. Make sure you spell a name correctly. ");
+				ChatbotMain.print("Sorry, I'm a very primitive tour bot model, programmed only to respond to inquiries about food and local events. Please try again; what do you want to do?");
 			}
 		}
 	}
 	public void startMark(String s) {
 		mark.talk(s);
+	}
+	public void startWilliam(String s) {
+		william.talk(s);
 	}
 
 }
