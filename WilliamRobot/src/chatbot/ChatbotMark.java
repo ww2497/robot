@@ -26,7 +26,7 @@ public class ChatbotMark implements Topic {
 	public void talk(String response) {
 		while(ChatbotMain.chatbot.getLocation().equals("unknown")) {
 			while(ChatbotMain.chatbot.getBorough().equals("unknown")) {
-				ChatbotMain.print("Okay, but first I should know what borough you are in now.");
+				ChatbotMain.print("Okay, but first I should know what borough you are currently in.");
 				response = ChatbotMain.getInput();
 				for(int i = 0; i < boroughs.length; i++) {
 					if(ChatbotMain.findKeyword(response, boroughs[i], 0) >= 0) {
@@ -36,13 +36,13 @@ public class ChatbotMark implements Topic {
 					}
 				}
 				if(ChatbotMain.chatbot.getBorough().equals("unknown")){
-					ChatbotMain.print("Please type it again correctly. Ya know the boroughs, like Brooklyn!");
+					ChatbotMain.print("Please type it again correctly. Ya know, the boroughs. Like Brooklyn!");
 				}
 			}
 			response = ChatbotMain.getInput();
 			for(int i = 0; i < neighborhoods.length; i++) {
 				if(ChatbotMain.findKeyword(response, neighborhoods[i], 0) >= 0) {
-					ChatbotMain.print("Thanks!");
+					ChatbotMain.print("Okay.");
 					ChatbotMain.chatbot.setLocation(neighborhoods[i]);
 					ChatbotMain.chatbot.setTrain(trains[i]);
 					
@@ -50,15 +50,15 @@ public class ChatbotMark implements Topic {
 			}
 			
 			if(ChatbotMain.chatbot.getLocation().equals("unknown")){
-				ChatbotMain.print("It's funny how I don't know where that is. Please name another more popular neighborhood near where you are.");
+				ChatbotMain.print("It's funny how I don't know where that is. Try naming a larger neighborhood near you.");
 			}
 		}
 		
 		while(ChatbotMain.findKeyword(response, goodbyeKeyword, 0 ) == -1) {
-			ChatbotMain.print("What neighborhood would you like to know about?");
+			ChatbotMain.print("What other neighborhood would you like to know about?");
 			response = ChatbotMain.getInput();
 			if(ChatbotMain.findKeyword(response, secretKeyword, 0 ) >= 0) {
-				ChatbotMain.print("Yes! New York was origanilly discovered by the Dutch! The origanal names that the Dutch created are still the ones we use today, such as, Brooklyn, and Manhattan");
+				ChatbotMain.print("Yes! New York was originally discovered by the Dutch! The origanal names that the Dutch created are still the ones we use today, such as, Brooklyn, and Manhattan");
 				response = ChatbotMain.getInput();
 			}else if (ChatbotMain.chatbot.checkTriggered(response)) {
 				response = "bye";
@@ -89,7 +89,7 @@ public class ChatbotMark implements Topic {
 					ChatbotMain.print("The West Village draws fashionable crowds to its designer boutiques and trendy restaurants. Quaint streets, some still cobblestoned, are lined with Federal-style townhouses and dotted with public squares. Notable venues include the Village Vanguard jazz club and the Stonewall Inn bar, site of the 1969 riots that launched the gay rights movement.");
 				}
 				if(ChatbotMain.findKeyword(response, neighborhoods[8], 0) >= 0) {
-					ChatbotMain.print("Bedford–Stuyvesant is a neighborhood of 153,000 inhabitants in the north central portion of the New York City borough of Brooklyn. The neighborhood is part of Brooklyn Community Board 3, Brooklyn Community Board 8, and Brooklyn Community Board 16. ");
+					ChatbotMain.print("Bedfordâ€“Stuyvesant is a neighborhood of 153,000 inhabitants in the north central portion of the New York City borough of Brooklyn. The neighborhood is part of Brooklyn Community Board 3, Brooklyn Community Board 8, and Brooklyn Community Board 16. ");
 				}
 				if(ChatbotMain.findKeyword(response, neighborhoods[9], 0) >= 0) {
 					ChatbotMain.print("Jamaica is a middle-class neighborhood in the New York City borough of Queens. The neighborhood is part of Queens Community Board 12, which also includes Hollis, St. Albans, Springfield Gardens, Baisley Pond Park, Rochdale Village, and South Jamaica. The NYPD's 103rd, 113th & 105th Precincts patrol Jamaica.");
@@ -105,7 +105,7 @@ public class ChatbotMark implements Topic {
 				}
 			}
 			if(ChatbotMain.findKeyword(response, goodbyeKeyword, 0) == -1) {
-				ChatbotMain.print("If you would like to talk about something else say 'bye'. ");
+				ChatbotMain.print("If you would like to talk about something, else say 'bye'. ");
 			}
 		}
 		//access stuff from other class
