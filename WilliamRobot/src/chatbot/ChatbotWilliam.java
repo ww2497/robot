@@ -6,6 +6,7 @@ public class ChatbotWilliam implements Topic {
 	private String[] decline;
 	private String[] lost;
 	private String[] repeat;
+	private String[] yes;
 	private String response;
 	private String goodByeKeyword;
 	private String repeating;
@@ -24,6 +25,8 @@ public class ChatbotWilliam implements Topic {
 		lost = help;
 		String[] again = {"repeat", "again", "directions", "train"};
 		repeat = again;
+		String[] affirmative = {"yes", "yeah", "yea"};
+		yes = affirmative;
 		repeating = "";
 		response = "";
 		chatting = true;
@@ -55,6 +58,12 @@ public class ChatbotWilliam implements Topic {
 					{
 						ChatbotMain.print("I am only programmed to respond to food and tourism related inquiries. Could you try again, " + ChatbotMain.chatbot.getUsername() + "?");
 					}
+					saidSomething = true;
+				}
+			}
+			for(int i = 0; i < yes.length; i++) {
+				if(ChatbotMain.findKeyword(response, yes[i], 0) >= 0) {
+					ChatbotMain.print("What do you need help with? As the transportation bot, I can give you directions to the restaurant suggested by the foodbot or provide a map of the subway.");
 					saidSomething = true;
 				}
 			}
@@ -97,7 +106,6 @@ public class ChatbotWilliam implements Topic {
 	@Override
 	public boolean isTriggered(String response) {
 		for(int i = 0; i < keywords.length; i++) {
-			//IMPORTANT (on the rubic)
 			if(ChatbotMain.findKeyword(response, keywords[i], 0) >= 0) {
 				return true;
 			}
@@ -105,3 +113,4 @@ public class ChatbotWilliam implements Topic {
 		return false;
 	}
 }
+
