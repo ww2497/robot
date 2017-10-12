@@ -41,14 +41,14 @@ public class ChatbotWilliam implements Topic {
 		}
 		A: while(chatting) {
 			saidSomething = false;
-			if(repeating.equals(response)) {
+			while(repeating.equals(response)) {
 				ChatbotMain.print("Repeating yourself doesn't get the point across any better. Is there anything else I can help you with?");
-				saidSomething = true;
+				response = ChatbotMain.getInput();
 			}
 			repeating = response;
 			for(int i = 0; i < decline.length; i++) {
 				if(ChatbotMain.findKeyword(response, decline[i], 0) >= 0) {
-					ChatbotMain.print("Alright. You can say 'events' or 'food' to summon the events bot or foodbot respectively.");
+					ChatbotMain.print("Alright. You can say 'bye' to go back to the main tourbot.");
 					response = ChatbotMain.getInput();
 					if(ChatbotMain.chatbot.checkTriggered(response)) {
 						chatting = false;
@@ -56,7 +56,7 @@ public class ChatbotWilliam implements Topic {
 					}
 					else
 					{
-						ChatbotMain.print("I am only programmed to respond to food and tourism related inquiries. Could you try again, " + ChatbotMain.chatbot.getUsername() + "?");
+						ChatbotMain.print("I didn't quite understand that, " + ChatbotMain.chatbot.getUsername() + ".");
 					}
 					saidSomething = true;
 				}
@@ -71,13 +71,13 @@ public class ChatbotWilliam implements Topic {
 				if(ChatbotMain.findKeyword(response, lost[i], 0) >= 0) {
 					ChatbotMain.print("Here's a map of the MTA Subway: http://web.mta.info/maps/submap.html. Did that help?");
 					response = ChatbotMain.getInput();
-					if(response == "no" || response == "nah" || response == "not really")
+					if(response.equals("no") || response.equals("nah") || response.equals("not really"))
 					{
-						ChatbotMain.print("I'm sorry to hear that.");
+						ChatbotMain.print("I'm sorry to hear that. Is there anything else you need?");
 					}
-					else if(response == "yes" || response == "yeah" || response == "somewhat")
+					else if(response.equals("yes") || response.equals("yeah") || response.equals("somewhat"))
 					{
-						ChatbotMain.print("I'm glad to hear that.");
+						ChatbotMain.print("I'm glad to hear that. Anything else you need?");
 					}
 					else 
 					{
