@@ -112,7 +112,11 @@ public class Chatbot {
 			}else if(theo.isTriggered(response)){
 				chatting = false;
 				theo.talk(response);
-			}else if(devin.isTriggered(response)) {
+			}else if(william.isTriggered(response)) {
+				chatting = false;
+				devin.talk(response);
+			}
+			else if(devin.isTriggered(response)) {
 				chatting = false;
 				devin.talk(response);
 			}else {

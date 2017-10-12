@@ -88,8 +88,10 @@ public class ChatbotWilliam implements Topic {
 			}
 			for(int i = 0; i < repeat.length; i++) {
 				if(ChatbotMain.findKeyword(response, repeat[i], 0) >= 0) {
-					ChatbotMain.print("Take the " + ChatbotMain.chatbot.getTrain() + " train to get to " + ChatbotMain.chatbot.getDestination() + ". Anything else you need, " + ChatbotMain.chatbot.getUsername() + "?");
-					saidSomething = true;
+					if(ChatbotMain.chatbot.getDestination() != null) {	
+						ChatbotMain.print("Take the " + ChatbotMain.chatbot.getTrain() + " train to get to " + ChatbotMain.chatbot.getDestination() + ". Anything else you need, " + ChatbotMain.chatbot.getUsername() + "?");
+						saidSomething = true;
+					}
 				}
 			}
 			if(!saidSomething) {
