@@ -6,11 +6,7 @@ public class ChatbotWilliam implements Topic {
 	private String[] decline;
 	private String[] lost;
 	private String[] repeat;
-	private String response;
-	private String goodByeKeyword;
 	private boolean chatting;
-	private static String train;
-	private static String destination;
 	
 	public ChatbotWilliam() {
 		String[] directions = {"where is", "get there", "go there", "go to", "get to", "directions"};
@@ -21,17 +17,21 @@ public class ChatbotWilliam implements Topic {
 		lost = help;
 		String[] again = {"repeat", "again", "directions", "train"};
 		repeat = again;
-		response = "";
 		chatting = true;
 	}
 	public void talk(String response) {
-		if(ChatbotMain.chatbot.getDestination() != null) {	
+		chatting = true;
+		if(ChatbotMain.chatbot.getDestination() == "unknown") {	
+		ChatbotMain.print("Where do you want to go?");
+			response = ChatbotMain.getInput();
 		ChatbotMain.print("Take the " + ChatbotMain.chatbot.getTrain() + " train to get to " + ChatbotMain.chatbot.getDestination() + ". Anything else you need, " + ChatbotMain.chatbot.getUsername() + "?");
 			response = ChatbotMain.getInput();
-		}else {
-			
+		}else if(ChatbotMain.chatbot.getLocation().equals("unknown")){
+			ChatbotMain.print("Okay, but first I need to know where you are right now. What neighborhood are you in right now?");
+			response = ChatbotMain.getInput();
+			ChatbotMain.chatbot.setLocation(response);
 		}
-		A: while(chatting) {
+		while(chatting) {
 			for(int i = 0; i < decline.length; i++) {
 				if(ChatbotMain.findKeyword(response, decline[i], 0) >= 0) {
 					ChatbotMain.print("Alright. Say 'sightseeing' or 'food' to summon the sightseeing bot or foodbot respectively.");
@@ -39,7 +39,7 @@ public class ChatbotWilliam implements Topic {
 					if(ChatbotMain.chatbot.checkTriggered(response)) {
 //						ChatbotMain.chatbot.checkTriggered(response);
 						chatting = false;
-						break A;
+						break;
 					}
 				}
 			}

@@ -8,6 +8,7 @@ public class Chatbot {
 	private Topic mark;
 	private Topic theo;
 	private Topic devin;
+	private String borough;
 	private String location;
 	private String date;
 	private String train;
@@ -19,14 +20,16 @@ public class Chatbot {
 		theo = new ChatbotTheo();
 		devin = new ChatbotDevin();
 		location = "unknown";
-		username = "unknown user";
+		username = "unknown";
 		date = "unknown";
+		destination = "unknown";
+		train ="unknown";
+		borough = "unknown";
 		chatting = true;
-		train ="";
 	}
 	
 	public boolean checkTriggered(String response) {
-		if(mark.isTriggered(response)) {//exits the while loop. IMPORTANT you get graded for this!
+		if(mark.isTriggered(response)) {
 			mark.talk(response);
 			return true;
 		}else if(theo.isTriggered(response)){
@@ -70,25 +73,29 @@ public class Chatbot {
 	public void setTrain(String currentTrain) {
 		train = currentTrain;
 	}
-	
 	public String getDestination() {
 		return destination;
 	}
 	public void setDestination(String currentDestination) {
 		destination = currentDestination;
 	}
+	public String getBorough() {
+		return borough;
+	}
+	public void setBorough(String currentBorough) {
+		borough = currentBorough;
+	}
 	public void startChatting() {
-		if(username == "unknown user") {
-			ChatbotMain.print("Hi! I am your New York City Tour Bot. Tell me your name?");
+		chatting = true;
+		if(username == "unknown") {
+			ChatbotMain.print("Hi! I am your New York City Tour Bot. What is your name?");
 			username = ChatbotMain.getInput();
 		}
-		else {
-			ChatbotMain.print("Hi! I am your New York City Tour Bot!");
-		}
+		ChatbotMain.print("Okay, "+ChatbotMain.chatbot.getUsername()+". I know a lot about New York City. You could learn about neighborhoods in the city, whats good to eat, how to get somewhere or what events are going on in those neighborhoods. What do you want to do?");
 		while(chatting) {
-			ChatbotMain.print("What would you like to talk about?");
 			String response = ChatbotMain.getInput();
-			if(response.equals("What would you like to talk about?")) {
+			//This if else is to prevent copying the bot, otherwise the user is stuck in the loop
+			if(response.equals("Nice to meet you "+ChatbotMain.chatbot.getUsername()+". I know a lot about New York City. You could learn about neighborhoods in the city, whats good to eat, how to get somewhere or what events are going on in those neighborhoods. What do you want to do?")) {
 				ChatbotMain.print("Please don't copy me! We can have a conversation instead!");
 				response = ChatbotMain.getInput();
 			}
@@ -109,7 +116,7 @@ public class Chatbot {
 				chatting = false;
 				devin.talk(response);
 			}else {
-				ChatbotMain.print("I don't know anything about that.");
+				ChatbotMain.print("I don't know. Make sure you spell a name correctly. ");
 			}
 		}
 	}
