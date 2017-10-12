@@ -50,7 +50,7 @@ public class ChatbotWilliam implements Topic {
 				if(ChatbotMain.findKeyword(response, decline[i], 0) >= 0) {
 					ChatbotMain.print("Alright. You can say 'bye' to go back to the main tourbot.");
 					response = ChatbotMain.getInput();
-					if(ChatbotMain.chatbot.checkTriggered(response)) {
+					if(response.equals("bye")) {
 						chatting = false;
 						break A;
 					}
@@ -94,14 +94,14 @@ public class ChatbotWilliam implements Topic {
 					}
 				}
 			}
+			if(response.equals("bye")) {
+				chatting = false;
+			}
 			if(!saidSomething) {
 				ChatbotMain.print("I didn't quite catch that. Is there something other than that I could help you with?");
 			}
 			response = ChatbotMain.getInput();
 		}
-		
-		response = ChatbotMain.getInput();
-		ChatbotMain.chatbot.checkTriggered(response);
 		ChatbotMain.chatbot.startChatting();
 	}
 
