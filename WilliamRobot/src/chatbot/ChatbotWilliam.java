@@ -39,7 +39,7 @@ public class ChatbotWilliam implements Topic {
 			ChatbotMain.print("Transportation bot here: I'm not quite sure how to get there, sorry. Is there anything else I can help you with?");
 			response = ChatbotMain.getInput();
 		}
-		A: while(chatting) {
+		while(chatting) {
 			saidSomething = false;
 			while(repeating.equals(response)) {
 				ChatbotMain.print("Repeating yourself doesn't get the point across any better. Is there anything else I can help you with?");
@@ -49,15 +49,6 @@ public class ChatbotWilliam implements Topic {
 			for(int i = 0; i < decline.length; i++) {
 				if(ChatbotMain.findKeyword(response, decline[i], 0) >= 0) {
 					ChatbotMain.print("Alright. You can say 'bye' to go back to the main tourbot.");
-					response = ChatbotMain.getInput();
-					if(response.equals("bye")) {
-						chatting = false;
-						break A;
-					}
-					else
-					{
-						ChatbotMain.print("I didn't quite understand that, " + ChatbotMain.chatbot.getUsername() + ".");
-					}
 					saidSomething = true;
 				}
 			}
@@ -95,14 +86,15 @@ public class ChatbotWilliam implements Topic {
 				}
 			}
 			if(response.equals("bye")) {
+				ChatbotMain.print("It was nice talking to you.");
 				chatting = false;
+				ChatbotMain.chatbot.startChatting();
 			}
 			if(!saidSomething) {
 				ChatbotMain.print("I didn't quite catch that. Is there something other than that I could help you with?");
 			}
 			response = ChatbotMain.getInput();
 		}
-		ChatbotMain.chatbot.startChatting();
 	}
 
 	@Override
